@@ -1,1 +1,66 @@
-///ASIO TODO
+//TODOLIST
+
+[]BACKOFFICE(page Admin)
+    []Login
+        []Base
+            []table Role(id, Description)
+            []Table users(id, role_id, nom, prenom, mail, hashedPassword)
+        []Route
+            []redirection acceuille
+        []models
+            []UsersModels
+                []fonc checkuser
+        []Controllers
+            []UserCOntroller
+        []design
+            []chatgpt
+[]FrontOffice
+    []Login
+        [ok]login
+        []Inscription
+            []inputs inscriptions
+            []js switch
+        []models
+            []UsersModels
+                -[]fonc addusers
+    []page gerer objets
+        []Base
+            []table objets(id, owner, nom, description, image, prix)
+        []route
+        []models
+            -[]object models
+                -[]fonc getMyObjects
+        []Controllers
+            -[]objectControllers
+        []design
+            -[]chatgpt
+    []page pour voir la liste des object
+        []Fiche objets(afficher d'autres objets)
+            []models
+                []objetsModels
+                    -[]fonc getObjectsById
+            []Controllers
+                []objectControllers
+                    []appel foc getObjectsById
+            []design
+                []chatgpt
+        []Proposition d'echange avec notre objets
+            []models
+                []fonc getObjects
+            []Controllers
+                []objectControllers
+                    -[]appel getObjects
+    []page gerer les echanges
+        []afficher liste Proposition
+        []accepter ou refus
+        []models
+            -[]objetsModels
+                -[]fonc switch owner
+        []Controllers
+            []objectControllers
+                []appel de switch owner
+
+            
+        
+
+    
