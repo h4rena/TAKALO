@@ -68,8 +68,8 @@ return [
 	'database' => [
     'host'     => '127.0.0.1',
     'dbname'   => 'takalo',
-    'user'     => 'postgres',
-    'password' => 'postgres',
+    'user'     => 'root',
+    'password' => '',
     ],
 
 ];
