@@ -10,28 +10,25 @@ use flight\net\Router;
  * @var Engine $app
  */
 
+$ds = DIRECTORY_SEPARATOR;
+$publicPath = realpath(__DIR__ . $ds . '..' . $ds . '..' . $ds . 'public');
+$publicUrl = rtrim(dirname($_SERVER['SCRIPT_NAME'] ?? '/'), '/');
+$publicUrl = $publicUrl === '' ? '/' : $publicUrl . '/';
+
+$app->set('app.public_path', $publicPath);
+$app->set('app.public_url', $publicUrl);
+
+if ($app->get('flight.base_url') === '/' && $publicUrl !== '/') {
+    $app->set('flight.base_url', $publicUrl);
+}
+
 // This wraps all routes in the group with the SecurityHeadersMiddleware
 $router->group('', function(Router $router) use ($app) {
-    /*
-	 $router->get('/', function() {
-        require __DIR__ . '/../../app/views/home.php';
-    });
-    $router->get('/home',function() {
-        require __DIR__ . '/../../app/views/home.php';
-        
-    });
-	$router->get('/produit',function() {
-        require __DIR__ . '/../../app/views/produit.php';
-    });
-    $router->post('/produit', function() {
-        require __DIR__ . '/../../app/views/produit.php';
+    $router->get('/', function() use ($app) {
+        $app->render('login');
     });
 
-
-	$router->group('/api', function() use ($router) {
-		$router->get('/products', [ ApiProductController::class, 'getproducts' ]);
-		$router->get('/products/@id:[0-9]', [ ApiProductController::class, 'getproduct' ]);
-		$router->post('/products/@id:[0-9]', [ ApiProductController::class, 'updateProduct' ]);
-	});
-	*/
+    $router->get('/login', function() use ($app) {
+        $app->render('login');
+    });
 }, [ SecurityHeadersMiddleware::class ]);
