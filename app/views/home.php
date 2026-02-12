@@ -24,12 +24,38 @@
 
   <div class="card">
     <h2>Bienvenue sur Takalo !</h2>
-    <p>Gérez vos objets, parcourez les objets disponibles et proposez des échanges.</p>
-    <div class="actions">
-      <form action="/objects/mine" method="get"><button type="submit">Mes Objets</button></form>
-      <form action="/objects" method="get"><button type="submit" class="secondary">Voir les Objets</button></form>
-      <form action="/exchanges" method="get"><button type="submit" class="secondary">Mes Échanges</button></form>
-    </div>
+  </div>
+
+  <br>
+
+  <div class="card">
+    <h2>Objets disponibles</h2>
+    <?php if (empty($objects)): ?>
+      <p>Aucun objet disponible.</p>
+    <?php else: ?>
+      <div class="grid grid-3">
+        <?php foreach ($objects as $obj): ?>
+          <div class="object-card">
+            <?php if (!empty($obj->image)): ?>
+              <center>              <img class="object-thumb" src="/assets/uploads/<?= htmlspecialchars((string) $obj->image, ENT_QUOTES, 'UTF-8') ?>" alt="Photo">
+</center>
+            <?php endif; ?>
+            <div class="meta">
+              <h3><?= htmlspecialchars((string) $obj->nom_objet, ENT_QUOTES, 'UTF-8') ?></h3>
+              <p><strong>Par:</strong> <?= htmlspecialchars((string) $obj->username, ENT_QUOTES, 'UTF-8') ?></p>
+              <p><?= htmlspecialchars(mb_substr((string) ($obj->description ?? ''), 0, 90), ENT_QUOTES, 'UTF-8') ?></p>
+              <p><strong>Prix:</strong> <?= htmlspecialchars(number_format((float) $obj->price, 2), ENT_QUOTES, 'UTF-8') ?> €</p>
+              <?php if (!empty($obj->categorie_nom)): ?>
+                <span class="badge"><?= htmlspecialchars((string) $obj->categorie_nom, ENT_QUOTES, 'UTF-8') ?></span>
+              <?php endif; ?>
+            </div>
+            <form action="/objects/<?= (int) $obj->id ?>" method="get" class="actions">
+              <button type="submit" class="secondary">Voir Détails</button>
+            </form>
+          </div>
+        <?php endforeach; ?>
+      </div>
+    <?php endif; ?>
   </div>
 </div>
 </body>

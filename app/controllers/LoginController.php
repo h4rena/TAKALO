@@ -23,7 +23,7 @@ class LoginController
 
 		if (!empty($_SESSION['user'])) {
 			if ((int) ($_SESSION['user']['role_id'] ?? 0) === 1) {
-				$this->app->redirect('/admin/categories');
+				$this->app->redirect('/admin/stats');
 				return;
 			}
 
