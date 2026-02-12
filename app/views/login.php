@@ -10,13 +10,7 @@
 <div class="container" id="container">
   <div class="form-container sign-up-container">
     <form action="/register" method="post" id="registerForm" novalidate>
-      <h1>Create Account</h1>
-      <div class="social-container">
-        <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-        <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-        <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-      </div>
-      <span>or use your email for registration</span>
+      <span>Inscrivez-vous pour avoir un compte</span>
       <?php if (!empty($register_error)): ?>
         <p class="error" style="color: #c0392b; margin: 8px 0;">
           <?= htmlspecialchars($register_error, ENT_QUOTES, 'UTF-8') ?>
@@ -37,12 +31,7 @@
   <div class="form-container sign-in-container">
     <form action="/login" method="post" id="loginForm" novalidate>
       <h1>Sign in</h1>
-      <div class="social-container">
-        <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-        <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-        <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-      </div>
-      <span>or use your account</span>
+      <span>Connectez-vous pour continuer</span>
       <?php if (!empty($error)): ?>
         <p class="error" style="color: #c0392b; margin: 8px 0;">
           <?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?>
