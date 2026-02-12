@@ -1,0 +1,160 @@
+  .history-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .object-header {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .object-image-container {
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .object-image {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .object-details h1 {
+            font-size: 28px;
+            margin: 0 0 15px 0;
+            color: #333;
+        }
+
+        .object-details-info {
+            display: grid;
+            gap: 15px;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        .detail-value {
+            color: #333;
+            text-align: right;
+        }
+
+        .price {
+            font-size: 18px;
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .history-title {
+            font-size: 24px;
+            margin: 40px 0 20px 0;
+            color: #333;
+        }
+
+        .history-timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .history-timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #3498db;
+        }
+
+        .history-item {
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .history-item::before {
+            content: '';
+            position: absolute;
+            left: -18px;
+            top: 6px;
+            width: 14px;
+            height: 14px;
+            background: #3498db;
+            border: 3px solid white;
+            border-radius: 50%;
+        }
+
+        .history-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+        }
+
+        .history-owner {
+            font-weight: bold;
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .history-date {
+            font-size: 13px;
+            color: #999;
+        }
+
+        .history-email {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #3498db;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .current-owner {
+            background: #e8f5e9;
+            border-color: #27ae60;
+        }
+
+        @media (max-width: 768px) {
+            .object-header {
+                grid-template-columns: 1fr;
+            }
+
+            .detail-row {
+                flex-direction: column;
+            }
+
+            .detail-value {
+                text-align: left;
+                margin-top: 5px;
+            }
+        }
