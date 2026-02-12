@@ -346,4 +346,43 @@ class ObjectController extends BaseController
 
 		return $normalized;
 	}
+
+	public function search(): void
+	{
+		$request = $this->app->request();
+		$query = trim((string) ($request->query->q ?? ''));
+		$categoryId = (int) ($request->query->category_id ?? 0);
+		$db = $this->app->db();
+
+		$objects = ObjectModel::search($db, $query, $categoryId);
+		$categories = CategoryModel::all($db);
+
+		$this->app->render('objects/search', [
+			'objects' => $objects,
+			'categories' => $categories,
+			'query' => $query,
+			'selected_category_id' => $categoryId,
+		]);
+	}
+
+	public function history(int $id): void
+	{
+		$db = $this->app->db();
+		$object = ObjectModel::findWithOwner($db, $id);
+
+		if ($object === null) {
+			$this->app->notFound();
+			return;
+		}
+
+		$history = ObjectModel::getOwnershipHistory($db, $id);
+		$photos = ObjectModel::getPhotos($db, $id);
+
+		$this->app->render('objects/history', [
+			'object' => $object,
+			'history' => $history,
+			'photos' => $photos,
+		]);
+	}
 }
+

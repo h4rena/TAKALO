@@ -55,3 +55,14 @@ CREATE TABLE echange_takalo (
     FOREIGN KEY (id_objet_propose) REFERENCES objet_takalo(id)
 );
 
+CREATE TABLE objet_owner_history_takalo (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_objet INT NOT NULL,
+    id_owner INT NOT NULL,
+    changed_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_objet) REFERENCES objet_takalo(id),
+    FOREIGN KEY (id_owner) REFERENCES user_takalo(id),
+    INDEX idx_object (id_objet),
+    INDEX idx_changed_at (changed_at)
+);
+

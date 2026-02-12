@@ -31,6 +31,18 @@ $isAdmin = !empty($_SESSION['user']) && (int) ($_SESSION['user']['role_id'] ?? 0
 
   <div class="card">
     <h2>Liste des objets</h2>
+    
+    <div style="margin-bottom: 20px; padding: 15px; background: #f9f9f9; border-radius: 8px;">
+      <form method="get" action="/objects/search" style="display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px; align-items: end;">
+        <div>
+          <input type="text" name="q" placeholder="Rechercher par titre..." style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+        </div>
+        <div>
+          <button type="submit" style="padding: 8px 15px; background: #3498db; color: white; border: none; border-radius: 4px; cursor: pointer; width: 100%;">Rechercher</button>
+        </div>
+      </form>
+    </div>
+    
     <?php if (empty($objects)): ?>
       <p>Aucun objet disponible.</p>
     <?php else: ?>
@@ -49,9 +61,14 @@ $isAdmin = !empty($_SESSION['user']) && (int) ($_SESSION['user']['role_id'] ?? 0
                 <span class="badge"><?= htmlspecialchars((string) $obj->categorie_nom, ENT_QUOTES, 'UTF-8') ?></span>
               <?php endif; ?>
             </div>
-            <form action="/objects/<?= (int) $obj->id ?>" method="get" class="actions">
-              <button type="submit" class="secondary">Voir Détails</button>
-            </form>
+            <div class="actions" style="display: flex; gap: 8px;">
+              <form action="/objects/<?= (int) $obj->id ?>" method="get" style="flex: 1;">
+                <button type="submit" class="secondary" style="width: 100%;">Voir Détails</button>
+              </form>
+              <form action="/objects/<?= (int) $obj->id ?>/history" method="get" style="flex: 1;">
+                <button type="submit" class="secondary" style="width: 100%;">Historique</button>
+              </form>
+            </div>
           </div>
         <?php endforeach; ?>
       </div>
