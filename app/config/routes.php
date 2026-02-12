@@ -1,6 +1,11 @@
 <?php
 
-use app\controllers\ApiProductController;
+use app\controllers\AdminController;
+use app\controllers\CategoryController;
+use app\controllers\ExchangeController;
+use app\controllers\HomeController;
+use app\controllers\LoginController;
+use app\controllers\ObjectController;
 use app\middlewares\SecurityHeadersMiddleware;
 use flight\Engine;
 use flight\net\Router;
@@ -24,11 +29,42 @@ if ($app->get('flight.base_url') === '/' && $publicUrl !== '/') {
 
 // This wraps all routes in the group with the SecurityHeadersMiddleware
 $router->group('', function(Router $router) use ($app) {
-    $router->get('/', function() use ($app) {
-        $app->render('login');
-    });
+    // User login/register/logout
+    $router->get('/', [ LoginController::class, 'show' ]);
+    $router->get('/login', [ LoginController::class, 'show' ]);
+    $router->post('/login', [ LoginController::class, 'authenticate' ]);
+    $router->post('/register', [ LoginController::class, 'register' ]);
+    $router->get('/logout', [ LoginController::class, 'logout' ]);
 
-    $router->get('/login', function() use ($app) {
-        $app->render('login');
-    });
+    // Home
+    $router->get('/home', [ HomeController::class, 'index' ]);
+
+    // User objects management
+    $router->get('/objects/mine', [ ObjectController::class, 'mine' ]);
+    $router->get('/objects/create', [ ObjectController::class, 'createForm' ]);
+    $router->post('/objects', [ ObjectController::class, 'store' ]);
+    $router->get('/objects/@id/edit', [ ObjectController::class, 'editForm' ]);
+    $router->post('/objects/@id', [ ObjectController::class, 'update' ]);
+    $router->post('/objects/@id/delete', [ ObjectController::class, 'delete' ]);
+
+    // Objects list & details
+    $router->get('/objects', [ ObjectController::class, 'listOthers' ]);
+    $router->get('/objects/@id', [ ObjectController::class, 'show' ]);
+    $router->post('/objects/@id/propose', [ ObjectController::class, 'propose' ]);
+
+    // Exchanges
+    $router->get('/exchanges', [ ExchangeController::class, 'index' ]);
+    $router->post('/exchanges/@id/accept', [ ExchangeController::class, 'accept' ]);
+    $router->post('/exchanges/@id/refuse', [ ExchangeController::class, 'refuse' ]);
+
+    // Admin routes
+    $router->get('/admin/login', [ AdminController::class, 'showLogin' ]);
+    $router->post('/admin/login', [ AdminController::class, 'authenticate' ]);
+    $router->get('/admin/logout', [ AdminController::class, 'logout' ]);
+
+    $router->get('/admin/categories', [ CategoryController::class, 'index' ]);
+    $router->post('/admin/categories', [ CategoryController::class, 'store' ]);
+    $router->get('/admin/categories/@id/edit', [ CategoryController::class, 'edit' ]);
+    $router->post('/admin/categories/@id/update', [ CategoryController::class, 'update' ]);
+    $router->post('/admin/categories/@id/delete', [ CategoryController::class, 'delete' ]);
 }, [ SecurityHeadersMiddleware::class ]);

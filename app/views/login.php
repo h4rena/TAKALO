@@ -4,36 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/assets/css/login.css">
+    <link rel="stylesheet" href="assets/css/login.css">
 </head>
 <body>
 <div class="container" id="container">
   <div class="form-container sign-up-container">
-    <form action="#">
-      <h1>Create Account</h1>
-      <div class="social-container">
-        <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-        <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-        <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-      </div>
-      <span>or use your email for registration</span>
-      <input type="text" placeholder="Name" />
-      <input type="email" placeholder="Email" />
-      <input type="password" placeholder="Password" />
+    <form action="/register" method="post" id="registerForm" novalidate>
+      <span>Inscrivez-vous pour avoir un compte</span>
+      <?php if (!empty($register_error)): ?>
+        <p class="error" style="color: #c0392b; margin: 8px 0;">
+          <?= htmlspecialchars($register_error, ENT_QUOTES, 'UTF-8') ?>
+        </p>
+      <?php endif; ?>
+      <?php if (!empty($register_success)): ?>
+        <p class="success" style="color: #27ae60; margin: 8px 0;">
+          <?= htmlspecialchars($register_success, ENT_QUOTES, 'UTF-8') ?>
+        </p>
+      <?php endif; ?>
+      <p class="client-error" aria-live="polite"></p>
+      <input type="text" name="username" placeholder="Name" minlength="3" maxlength="50" required />
+      <input type="email" name="email" placeholder="Email" maxlength="255" required />
+      <input type="password" name="password" placeholder="Password" minlength="6" maxlength="255" required />
       <button>Sign Up</button>
     </form>
   </div>
   <div class="form-container sign-in-container">
-    <form action="#">
+    <form action="/login" method="post" id="loginForm" novalidate>
       <h1>Sign in</h1>
-      <div class="social-container">
-        <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-        <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-        <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-      </div>
-      <span>or use your account</span>
-      <input type="email" placeholder="Email" />
-      <input type="password" placeholder="Password" />
+      <span>Connectez-vous pour continuer</span>
+      <?php if (!empty($error)): ?>
+        <p class="error" style="color: #c0392b; margin: 8px 0;">
+          <?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?>
+        </p>
+      <?php endif; ?>
+      <p class="client-error" aria-live="polite"></p>
+      <input type="email" name="email" placeholder="Email" maxlength="255" required />
+      <input type="password" name="password" placeholder="Password" minlength="6" maxlength="255" required />
       <a href="#">Forgot your password?</a>
       <button>Sign In</button>
     </form>
@@ -54,6 +60,7 @@
   </div>
 </div>
 
-    <script src="/assets/js/script.js"></script>
+    <script src="assets/js/script.js"></script>
+    
 </body>
 </html>
