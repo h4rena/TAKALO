@@ -3,84 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Glassmorphism Login Form</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+    <link rel="stylesheet" href="assets/css/login.css">
 </head>
 <body>
-    <div class="login-container">
-        <div class="login-card">
-            <div class="login-header">
-                <h2>Welcome Back</h2>
-                <p>Sign in to your account</p>
-            </div>
-            
-            <form class="login-form" id="loginForm" novalidate>
-                <div class="form-group">
-                    <div class="input-wrapper">
-                        <input type="email" id="email" name="email" required autocomplete="email">
-                        <label for="email">Email Address</label>
-                        <span class="focus-border"></span>
-                    </div>
-                    <span class="error-message" id="emailError"></span>
-                </div>
-
-                <div class="form-group">
-                    <div class="input-wrapper password-wrapper">
-                        <input type="password" id="password" name="password" required autocomplete="current-password">
-                        <label for="password">Password</label>
-                        <button type="button" class="password-toggle" id="passwordToggle" aria-label="Toggle password visibility">
-                            <span class="eye-icon"></span>
-                        </button>
-                        <span class="focus-border"></span>
-                    </div>
-                    <span class="error-message" id="passwordError"></span>
-                </div>
-
-                <div class="form-options">
-                    <label class="remember-wrapper">
-                        <input type="checkbox" id="remember" name="remember">
-                        <span class="checkbox-label">
-                            <span class="checkmark"></span>
-                            Remember me
-                        </span>
-                    </label>
-                    <a href="#" class="forgot-password">Forgot password?</a>
-                </div>
-
-                <button type="submit" class="login-btn btn">
-                    <span class="btn-text">Sign In</span>
-                    <span class="btn-loader"></span>
-                </button>
-            </form>
-
-            <div class="divider">
-                <span>or continue with</span>
-            </div>
-
-            <div class="social-login">
-                <button type="button" class="social-btn google-btn">
-                    <span class="social-icon google-icon"></span>
-                    Google
-                </button>
-                <button type="button" class="social-btn github-btn">
-                    <span class="social-icon github-icon"></span>
-                    GitHub
-                </button>
-            </div>
-
-            <div class="signup-link">
-                <p>Don't have an account? <a href="#">Sign up</a></p>
-            </div>
-
-            <div class="success-message" id="successMessage">
-                <div class="success-icon">✓</div>
-                <h3>Login Successful!</h3>
-                <p>Redirecting to your dashboard...</p>
-            </div>
-        </div>
+<div class="container" id="container">
+  <div class="form-container sign-up-container">
+    <form action="#">
+      <h1>Create Account</h1>
+      <div class="social-container">
+        <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+        <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+      <span>or use your email for registration</span>
+      <input type="text" placeholder="Name" />
+      <input type="email" placeholder="Email" />
+      <input type="password" placeholder="Password" />
+      <button>Sign Up</button>
+    </form>
+  </div>
+  <div class="form-container sign-in-container">
+    <form action="#">
+      <h1>Sign in</h1>
+      <div class="social-container">
+        <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+        <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+      <span>or use your account</span>
+      <input type="email" placeholder="Email" />
+      <input type="password" placeholder="Password" />
+      <a href="#">Forgot your password?</a>
+      <button>Sign In</button>
+    </form>
+  </div>
+  <div class="overlay-container">
+    <div class="overlay">
+      <div class="overlay-panel overlay-left">
+        <h1>Welcome Back!</h1>
+        <p>To keep connected with us please login with your personal info</p>
+        <button class="ghost" id="signIn">Sign In</button>
+      </div>
+      <div class="overlay-panel overlay-right">
+        <h1>Hello, Friend!</h1>
+        <p>Enter your personal details and start journey with us</p>
+        <button class="ghost" id="signUp">Sign Up</button>
+      </div>
     </div>
+  </div>
+</div>
 
-    <script src="../../shared/js/form-utils.js"></script>
-    <script src="script.js"></script>
+    <script src="assets/js/script.js"></script>
+    
 </body>
 </html>
