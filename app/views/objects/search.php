@@ -10,6 +10,9 @@ $title = 'Recherche';
     <link rel="stylesheet" href="/assets/css/app.css">
 </head>
 <body>
+    <?php $pageTitle = 'Recherche'; ?>
+    <?php include __DIR__ . '/../partials/header.php'; ?>
+    
     <div class="search-container">
         <h1><?= htmlspecialchars($title, ENT_QUOTES, 'UTF-8') ?></h1>
 
@@ -34,7 +37,9 @@ $title = 'Recherche';
             <div class="objects-grid">
                 <?php foreach ($objects as $object): ?>
                     <div class="object-card">
-                        <img src="/assets/images/<?= htmlspecialchars($object['image'], ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars($object['nom_objet'], ENT_QUOTES, 'UTF-8') ?>" class="object-image">
+                        <a href="/objects/<?= (int)$object['id'] ?>" style="display: block; text-decoration: none;">
+                            <img src="/assets/images/<?= htmlspecialchars($object['image'], ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars($object['nom_objet'], ENT_QUOTES, 'UTF-8') ?>" class="object-image" style="cursor: pointer;">
+                        </a>
                         <div class="object-info">
                             <div class="object-name"><?= htmlspecialchars($object['nom_objet'], ENT_QUOTES, 'UTF-8') ?></div>
                             <?php if ($object['categorie_nom']): ?>
@@ -56,5 +61,8 @@ $title = 'Recherche';
             </div>
         <?php endif; ?>
     </div>
+
+<?php include __DIR__ . '/../partials/footer.php'; ?>
+
 </body>
 </html>

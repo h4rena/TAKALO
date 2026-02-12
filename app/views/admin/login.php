@@ -27,9 +27,11 @@
       <div class="overlay-panel overlay-right">
         <h1>Backoffice</h1>
         <p>Administration des catégories et du système</p>
-      </div>
-    </div>
+    </form>
   </div>
 </div>
+
+<?php include __DIR__ . '/../partials/footer.php'; ?>
+
 </body>
 </html>

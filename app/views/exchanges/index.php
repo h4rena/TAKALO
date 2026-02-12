@@ -87,5 +87,8 @@ $isAdmin = !empty($_SESSION['user']) && (int) ($_SESSION['user']['role_id'] ?? 0
     <?php endif; ?>
   </div>
 </div>
+
+<?php include __DIR__ . '/../partials/footer.php'; ?>
+
 </body>
 </html>

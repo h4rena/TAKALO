@@ -1,15 +1,18 @@
 <?php
-$title = 'Historique d\'appartenance';
+$pageTitle = 'Historique d\'appartenance';
 ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= htmlspecialchars($title, ENT_QUOTES, 'UTF-8') ?></title>
+    <title><?= htmlspecialchars($pageTitle, ENT_QUOTES, 'UTF-8') ?></title>
     <link rel="stylesheet" href="/assets/css/app.css">
+    <link rel="stylesheet" href="/assets/css/history.css">
 </head>
 <body>
+    <?php include __DIR__ . '/../partials/header.php'; ?>
+    
     <div class="history-container">
         <a href="/objects" class="back-link">&larr; Retour à la liste</a>
 
@@ -72,5 +75,8 @@ $title = 'Historique d\'appartenance';
             </div>
         <?php endif; ?>
     </div>
+
+<?php include __DIR__ . '/../partials/footer.php'; ?>
+
 </body>
 </html>

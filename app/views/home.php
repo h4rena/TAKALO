@@ -24,29 +24,7 @@
   <div class="card">
     <h2>Bienvenue sur Takalo !</h2>
     
-    <div style="margin: 20px 0; padding: 20px; background: #f9f9f9; border-radius: 8px;">
-      <h3 style="margin-top: 0;">Rechercher un objet</h3>
-      <form method="get" action="/home" style="display: grid; grid-template-columns: 1fr 1fr auto; gap: 15px; align-items: end;">
-        <div>
-          <label style="display: block; margin-bottom: 5px; font-weight: bold; font-size: 14px;">Titre ou description</label>
-          <input type="text" name="q" placeholder="Chercher un objet..." value="<?= htmlspecialchars($query ?? '', ENT_QUOTES, 'UTF-8') ?>" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;">
-        </div>
-        <div>
-          <label style="display: block; margin-bottom: 5px; font-weight: bold; font-size: 14px;">Catégorie</label>
-          <select name="category_id" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;">
-            <option value="0">-- Toutes les catégories --</option>
-            <?php foreach ($categories as $cat): ?>
-              <option value="<?= (int)$cat['id'] ?>" <?= ((int)($selected_category_id ?? 0) === (int)$cat['id']) ? 'selected' : '' ?>>
-                <?= htmlspecialchars($cat['nom'], ENT_QUOTES, 'UTF-8') ?>
-              </option>
-            <?php endforeach; ?>
-          </select>
-        </div>
-        <div>
-          <button type="submit" style="padding: 10px 20px; background: #3498db; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">Rechercher</button>
-        </div>
-      </form>
-    </div>
+    <?php include __DIR__ . '/partials/search.php'; ?>
   </div>
 
   <br>
@@ -60,8 +38,9 @@
         <?php foreach ($objects as $obj): ?>
           <div class="object-card">
             <?php if (!empty($obj->image)): ?>
-              <center>              <img class="object-thumb" src="/assets/uploads/<?= htmlspecialchars((string) $obj->image, ENT_QUOTES, 'UTF-8') ?>" alt="Photo">
-</center>
+              <a href="/objects/<?= (int) $obj->id ?>" style="display: block; text-decoration: none;">
+                <center><img class="object-thumb" src="/assets/uploads/<?= htmlspecialchars((string) $obj->image, ENT_QUOTES, 'UTF-8') ?>" alt="Photo" style="cursor: pointer;"></center>
+              </a>
             <?php endif; ?>
             <div class="meta">
               <h3><?= htmlspecialchars((string) $obj->nom_objet, ENT_QUOTES, 'UTF-8') ?></h3>
@@ -81,5 +60,8 @@
     <?php endif; ?>
   </div>
 </div>
+
+<?php include __DIR__ . '/partials/footer.php'; ?>
+
 </body>
 </html>

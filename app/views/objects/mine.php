@@ -53,7 +53,9 @@ $isAdmin = !empty($_SESSION['user']) && (int) ($_SESSION['user']['role_id'] ?? 0
         <?php foreach ($objects as $obj): ?>
           <div class="object-card">
             <?php if (!empty($obj->image)): ?>
-              <img class="object-thumb" src="/assets/uploads/<?= htmlspecialchars((string) $obj->image, ENT_QUOTES, 'UTF-8') ?>" alt="Photo">
+              <a href="/objects/<?= (int) $obj->id ?>" style="display: block; text-decoration: none;">
+                <img class="object-thumb" src="/assets/uploads/<?= htmlspecialchars((string) $obj->image, ENT_QUOTES, 'UTF-8') ?>" alt="Photo" style="cursor: pointer;">
+              </a>
             <?php endif; ?>
             <div class="meta">
               <h3><?= htmlspecialchars((string) $obj->nom_objet, ENT_QUOTES, 'UTF-8') ?></h3>
@@ -77,5 +79,8 @@ $isAdmin = !empty($_SESSION['user']) && (int) ($_SESSION['user']['role_id'] ?? 0
     <?php endif; ?>
   </div>
 </div>
+
+<?php include __DIR__ . '/../partials/footer.php'; ?>
+
 </body>
 </html>
