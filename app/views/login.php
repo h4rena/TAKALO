@@ -23,7 +23,7 @@
       <?php endif; ?>
       <p class="client-error" aria-live="polite"></p>
       <input type="text" name="username" placeholder="Name" minlength="3" maxlength="50" required />
-      <input type="email" name="email" placeholder="Email" maxlength="255" required />
+      <input type="email" name="email" placeholder="Email" maxlength="255" value="<?= htmlspecialchars($default_email ?? '', ENT_QUOTES, 'UTF-8') ?>" required />
       <input type="password" name="password" placeholder="Password" minlength="6" maxlength="255" required />
       <button>Sign Up</button>
     </form>
