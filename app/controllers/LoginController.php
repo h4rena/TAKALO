@@ -34,9 +34,7 @@ class LoginController
 		$flash = $_SESSION['flash'] ?? [];
 		unset($_SESSION['flash']);
 
-		$this->app->render('login', $flash + [
-			'default_email' => 'admin@takalo.test',
-		]);
+		$this->app->render('login', $flash);
 	}
 
 	public function authenticate(): void
