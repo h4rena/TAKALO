@@ -55,7 +55,12 @@ class ObjectModel
 			]
 		);
 
-		return (int) $db->fetchField('SELECT LAST_INSERT_ID()');
+		$objectId = (int) $db->fetchField('SELECT LAST_INSERT_ID()');
+
+		// Record the initial ownership
+		self::recordOwnershipChange($db, $objectId, $data['owner_id']);
+
+		return $objectId;
 	}
 
 	public static function update($db, int $id, array $data): void
@@ -93,4 +98,43 @@ class ObjectModel
 			);
 		}
 	}
+
+	public static function search($db, string $query = '', int $categoryId = 0): array
+	{
+		$sql = 'SELECT o.*, u.username, c.nom AS categorie_nom FROM objet_takalo o JOIN user_takalo u ON u.id = o.id_owner LEFT JOIN categorie_takalo c ON c.id = o.id_categorie WHERE 1=1';
+		$params = [];
+
+		if ($query !== '') {
+			$sql .= ' AND (o.nom_objet LIKE ? OR o.description LIKE ?)';
+			$searchTerm = '%' . $query . '%';
+			$params[] = $searchTerm;
+			$params[] = $searchTerm;
+		}
+
+		if ($categoryId > 0) {
+			$sql .= ' AND o.id_categorie = ?';
+			$params[] = $categoryId;
+		}
+
+		$sql .= ' ORDER BY o.id DESC';
+
+		return $db->fetchAll($sql, $params);
+	}
+
+	public static function getOwnershipHistory($db, int $objectId): array
+	{
+		return $db->fetchAll(
+			'SELECT h.*, u.username, u.email FROM objet_owner_history_takalo h JOIN user_takalo u ON u.id = h.id_owner WHERE h.id_objet = ? ORDER BY h.changed_at ASC',
+			[ $objectId ]
+		);
+	}
+
+	public static function recordOwnershipChange($db, int $objectId, int $userId): void
+	{
+		$db->runQuery(
+			'INSERT INTO objet_owner_history_takalo (id_objet, id_owner) VALUES (?, ?)',
+			[ $objectId, $userId ]
+		);
+	}
 }
+

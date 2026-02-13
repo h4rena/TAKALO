@@ -49,7 +49,9 @@ $router->group('', function(Router $router) use ($app) {
 
     // Objects list & details
     $router->get('/objects', [ ObjectController::class, 'listOthers' ]);
+    $router->get('/objects/search', [ ObjectController::class, 'search' ]);
     $router->get('/objects/@id', [ ObjectController::class, 'show' ]);
+    $router->get('/objects/@id/history', [ ObjectController::class, 'history' ]);
     $router->post('/objects/@id/propose', [ ObjectController::class, 'propose' ]);
 
     // Exchanges

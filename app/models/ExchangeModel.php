@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace app\models;
 
+use app\models\ObjectModel;
+
 class ExchangeModel
 {
 	public static function createProposal($db, int $requestedId, int $proposedId): void
@@ -44,5 +46,20 @@ class ExchangeModel
 			'UPDATE echange_takalo SET status = ?, responded_at = NOW() WHERE id = ?',
 			[ $status, $id ]
 		);
+
+		// If the exchange was accepted, record the ownership changes
+		if ($status === 'accepted') {
+			$exchange = $db->fetchRow(
+				'SELECT id_objet_demande, id_objet_propose, od.id_owner AS demande_owner, op.id_owner AS propose_owner FROM echange_takalo e JOIN objet_takalo od ON od.id = e.id_objet_demande JOIN objet_takalo op ON op.id = e.id_objet_propose WHERE e.id = ?',
+				[ $id ]
+			);
+
+			if ($exchange !== null) {
+				// The object that was demanded goes to the person who proposed it
+				ObjectModel::recordOwnershipChange($db, (int)$exchange['id_objet_demande'], (int)$exchange['propose_owner']);
+				// The object that was proposed goes to the person who demanded it
+				ObjectModel::recordOwnershipChange($db, (int)$exchange['id_objet_propose'], (int)$exchange['demande_owner']);
+			}
+		}
 	}
 }
