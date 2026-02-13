@@ -18,7 +18,7 @@ $isAdmin = !empty($_SESSION['user']) && (int) ($_SESSION['user']['role_id'] ?? 0
   <header>
     <div class="title">Détails Objet</div>
     <nav>
-      <a href="/objects">Retour</a>
+      <a href="/home">Retour</a>
       <?php if ($isAdmin): ?>
         <a href="/admin/categories">Admin</a>
       <?php endif; ?>
@@ -33,22 +33,39 @@ $isAdmin = !empty($_SESSION['user']) && (int) ($_SESSION['user']['role_id'] ?? 0
   <?php endif; ?>
 
   <div class="card">
-    <h1><?= htmlspecialchars((string) $object->nom_objet, ENT_QUOTES, 'UTF-8') ?></h1>
-    <p><strong>Propriétaire:</strong> <?= htmlspecialchars((string) $object->username, ENT_QUOTES, 'UTF-8') ?> (<?= htmlspecialchars((string) $object->email, ENT_QUOTES, 'UTF-8') ?>)</p>
-    <p><strong>Prix estimatif:</strong> <?= htmlspecialchars(number_format((float) $object->price, 2), ENT_QUOTES, 'UTF-8') ?> €</p>
-    <?php if (!empty($object->categorie_nom)): ?>
-      <p><strong>Catégorie:</strong> <span class="badge"><?= htmlspecialchars((string) $object->categorie_nom, ENT_QUOTES, 'UTF-8') ?></span></p>
-    <?php endif; ?>
-    <p><?= nl2br(htmlspecialchars((string) ($object->description ?? ''), ENT_QUOTES, 'UTF-8')) ?></p>
-
-    <?php if (!empty($photos)): ?>
-      <h3>Photos</h3>
-      <div class="gallery">
-        <?php foreach ($photos as $photo): ?>
-          <img src="/assets/uploads/<?= htmlspecialchars((string) $photo->filename, ENT_QUOTES, 'UTF-8') ?>" alt="Photo">
-        <?php endforeach; ?>
+    <?php
+      $mainPhoto = '';
+      if (!empty($photos) && !empty($photos[0]->filename)) {
+        $mainPhoto = (string) $photos[0]->filename;
+      } elseif (!empty($object->image)) {
+        $mainPhoto = (string) $object->image;
+      }
+    ?>
+    <div class="object-detail">
+      <div>
+        <h1><?= htmlspecialchars((string) $object->nom_objet, ENT_QUOTES, 'UTF-8') ?></h1>
+        <p><strong>Propriétaire:</strong> <?= htmlspecialchars((string) $object->username, ENT_QUOTES, 'UTF-8') ?> </p>
+        <p><strong>Prix estimatif:</strong> <?= htmlspecialchars(number_format((float) $object->price, 2), ENT_QUOTES, 'UTF-8') ?> €</p>
+        <?php if (!empty($object->categorie_nom)): ?>
+          <p><strong>Catégorie:</strong> <span class="badge"><?= htmlspecialchars((string) $object->categorie_nom, ENT_QUOTES, 'UTF-8') ?></span></p>
+        <?php endif; ?>
+        <p><?= nl2br(htmlspecialchars((string) ($object->description ?? ''), ENT_QUOTES, 'UTF-8')) ?></p>
       </div>
-    <?php endif; ?>
+
+      <div>
+        <?php if ($mainPhoto !== ''): ?>
+          <img class="object-hero" src="/assets/uploads/<?= htmlspecialchars($mainPhoto, ENT_QUOTES, 'UTF-8') ?>" alt="Photo">
+        <?php endif; ?>
+
+        <?php if (!empty($photos)): ?>
+          <div class="object-thumbs">
+            <?php foreach ($photos as $photo): ?>
+              <img src="/assets/uploads/<?= htmlspecialchars((string) $photo->filename, ENT_QUOTES, 'UTF-8') ?>" alt="Photo">
+            <?php endforeach; ?>
+          </div>
+        <?php endif; ?>
+      </div>
+    </div>
   </div>
 
   <br>

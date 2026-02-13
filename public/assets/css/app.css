@@ -116,6 +116,37 @@ nav a:hover {
   margin-top: 6px;
 }
 
+.object-detail {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 18px;
+  align-items: start;
+}
+
+.object-hero {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: #faf6f1;
+}
+
+.object-thumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.object-thumbs img {
+  width: 90px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+}
+
 .badge {
   display: inline-block;
   padding: 4px 10px;
@@ -210,5 +241,13 @@ button.secondary {
 @media (max-width: 700px) {
   header {
     align-items: flex-start;
+  }
+
+  .object-detail {
+    grid-template-columns: 1fr;
+  }
+
+  .object-hero {
+    height: 240px;
   }
 }

@@ -13,7 +13,6 @@
     <nav>
       <a href="/home">Accueil</a>
       <a href="/objects/mine">Mes Objets</a>
-      <a href="/objects">Objets</a>
       <a href="/exchanges">Échanges</a>
       <?php if ((int) ($user['role_id'] ?? 0) === 1): ?>
         <a href="/admin/categories">Admin</a>
