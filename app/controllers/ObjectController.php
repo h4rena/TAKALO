@@ -311,8 +311,8 @@ class ObjectController extends BaseController
 			}
 
 			$extension = image_type_to_extension($info[2], false);
-			if ($extension === '' || $extension === 'bmp') {
-				return [ 'files' => [], 'error' => 'Format image non supporte.' ];
+			if ($extension === '' || $extension === 'bmp' || !in_array($extension, ['jpeg', 'jpg', 'png', 'gif', 'webp'], true)) {
+				return [ 'files' => [], 'error' => 'Format image non supporte. Formats acceptes: JPEG, PNG, GIF, WEBP.' ];
 			}
 
 			$filename = uniqid('photo_', true) . '.' . $extension;

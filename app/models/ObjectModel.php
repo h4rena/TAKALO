@@ -81,6 +81,8 @@ class ObjectModel
 	public static function delete($db, int $id): void
 	{
 		$db->runQuery('DELETE FROM objet_photo_takalo WHERE id_objet = ?', [ $id ]);
+		$db->runQuery('DELETE FROM echange_takalo WHERE id_objet_demande = ? OR id_objet_propose = ?', [ $id, $id ]);
+		$db->runQuery('DELETE FROM objet_owner_history_takalo WHERE id_objet = ?', [ $id ]);
 		$db->runQuery('DELETE FROM objet_takalo WHERE id = ?', [ $id ]);
 	}
 
