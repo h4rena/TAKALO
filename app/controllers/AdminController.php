@@ -19,9 +19,7 @@ class AdminController extends BaseController
 		}
 
 		$flash = $this->consumeFlash('admin_flash');
-		$this->app->render('admin/login', $flash + [
-			'default_email' => 'admin@takalo.test',
-		]);
+		$this->app->render('admin/login', $flash);
 	}
 
 	public function authenticate(): void
