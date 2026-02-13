@@ -1,6 +1,7 @@
 <?php
 
 use app\controllers\ApiProductController;
+use app\controllers\LoginController;
 use app\middlewares\SecurityHeadersMiddleware;
 use flight\Engine;
 use flight\net\Router;
@@ -24,11 +25,19 @@ if ($app->get('flight.base_url') === '/' && $publicUrl !== '/') {
 
 // This wraps all routes in the group with the SecurityHeadersMiddleware
 $router->group('', function(Router $router) use ($app) {
-    $router->get('/', function() use ($app) {
-        $app->render('login');
-    });
-
-    $router->get('/login', function() use ($app) {
-        $app->render('login');
+    $router->get('/', [ LoginController::class, 'show' ]);
+    $router->get('/login', [ LoginController::class, 'show' ]);
+    $router->post('/login', [ LoginController::class, 'authenticate' ]);
+    $router->post('/register', [ LoginController::class, 'register' ]);
+    $router->get('/logout', [ LoginController::class, 'logout' ]);
+    $router->get('/home', function() use ($app) {
+        if (session_status() !== PHP_SESSION_ACTIVE) {
+            session_start();
+        }
+        if (empty($_SESSION['user'])) {
+            $app->redirect('/login');
+            return;
+        }
+        $app->render('home');
     });
 }, [ SecurityHeadersMiddleware::class ]);

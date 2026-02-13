@@ -16,6 +16,10 @@ CREATE TABLE user_takalo (
     FOREIGN KEY (id_role) REFERENCES user_role_takalo(role_id)
 );
 
+INSERT INTO user_role_takalo (role) VALUES ('admin'), ('user');
+
+ALTER TABLE user_takalo ALTER id_role SET DEFAULT 2;
+
 CREATE TABLE objet_takalo (
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_owner INT NOT NULL,
