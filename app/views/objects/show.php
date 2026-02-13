@@ -7,11 +7,21 @@
   <link rel="stylesheet" href="/assets/css/app.css">
 </head>
 <body>
+<?php
+$isAdmin = false;
+if (session_status() !== PHP_SESSION_ACTIVE) {
+  session_start();
+}
+$isAdmin = !empty($_SESSION['user']) && (int) ($_SESSION['user']['role_id'] ?? 0) === 1;
+?>
 <div class="container">
   <header>
     <div class="title">Détails Objet</div>
     <nav>
       <a href="/objects">Retour</a>
+      <?php if ($isAdmin): ?>
+        <a href="/admin/categories">Admin</a>
+      <?php endif; ?>
     </nav>
   </header>
 

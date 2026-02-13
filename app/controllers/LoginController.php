@@ -22,6 +22,11 @@ class LoginController
 		}
 
 		if (!empty($_SESSION['user'])) {
+			if ((int) ($_SESSION['user']['role_id'] ?? 0) === 1) {
+				$this->app->redirect('/admin/categories');
+				return;
+			}
+
 			$this->app->redirect('/home');
 			return;
 		}
@@ -29,7 +34,9 @@ class LoginController
 		$flash = $_SESSION['flash'] ?? [];
 		unset($_SESSION['flash']);
 
-		$this->app->render('login', $flash);
+		$this->app->render('login', $flash + [
+			'default_email' => 'admin@takalo.test',
+		]);
 	}
 
 	public function authenticate(): void
@@ -85,6 +92,11 @@ class LoginController
 			'email' => (string) $user->email,
 		];
 
+		if ((int) $user->id_role === 1) {
+			$this->app->redirect('/admin/categories');
+			return;
+		}
+
 		$this->app->redirect('/home');
 	}
 
@@ -128,7 +140,7 @@ class LoginController
 				return;
 			}
 
-			$roleId = (int) $db->fetchField('SELECT role_id FROM user_role_takalo ORDER BY role_id ASC LIMIT 1');
+			$roleId = (int) $db->fetchField("SELECT role_id FROM user_role_takalo WHERE role = 'user' LIMIT 1");
 			if ($roleId <= 0) {
 				$this->setFlashAndRedirect([ 'register_error' => 'Aucun rôle utilisateur disponible.' ], '/login');
 				return;
