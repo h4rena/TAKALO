@@ -45,7 +45,7 @@ $isAdmin = !empty($_SESSION['user']) && (int) ($_SESSION['user']['role_id'] ?? 0
       <div>
         <h1><?= htmlspecialchars((string) $object->nom_objet, ENT_QUOTES, 'UTF-8') ?></h1>
         <p><strong>Propriétaire:</strong> <?= htmlspecialchars((string) $object->username, ENT_QUOTES, 'UTF-8') ?> </p>
-        <p><strong>Prix estimatif:</strong> <?= htmlspecialchars(number_format((float) $object->price, 2), ENT_QUOTES, 'UTF-8') ?> €</p>
+        <p><strong>Prix estimatif:</strong> <?= htmlspecialchars(number_format((float) $object->price, 2), ENT_QUOTES, 'UTF-8') ?> Ar</p>
         <?php if (!empty($object->categorie_nom)): ?>
           <p><strong>Catégorie:</strong> <span class="badge"><?= htmlspecialchars((string) $object->categorie_nom, ENT_QUOTES, 'UTF-8') ?></span></p>
         <?php endif; ?>
@@ -81,7 +81,7 @@ $isAdmin = !empty($_SESSION['user']) && (int) ($_SESSION['user']['role_id'] ?? 0
           <option value="">-- Sélectionne --</option>
           <?php foreach ($my_objects as $mine): ?>
             <option value="<?= (int) $mine->id ?>">
-              <?= htmlspecialchars((string) $mine->nom_objet, ENT_QUOTES, 'UTF-8') ?> (<?= htmlspecialchars(number_format((float) $mine->price, 2), ENT_QUOTES, 'UTF-8') ?> €)
+              <?= htmlspecialchars((string) $mine->nom_objet, ENT_QUOTES, 'UTF-8') ?> (<?= htmlspecialchars(number_format((float) $mine->price, 2), ENT_QUOTES, 'UTF-8') ?> Ar)
             </option>
           <?php endforeach; ?>
         </select>

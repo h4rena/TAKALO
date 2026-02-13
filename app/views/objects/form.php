@@ -27,7 +27,7 @@
       <label>Description</label>
       <textarea name="description"><?= htmlspecialchars((string) ($object->description ?? ''), ENT_QUOTES, 'UTF-8') ?></textarea>
 
-      <label>Prix estimatif (€) *</label>
+      <label>Prix estimatif (Ar) *</label>
       <input type="number" step="0.01" name="price" value="<?= htmlspecialchars((string) ($object->price ?? ''), ENT_QUOTES, 'UTF-8') ?>" required />
 
       <label>Catégorie</label>
