@@ -8,18 +8,8 @@
 </head>
 <body>
 <div class="container">
-  <header>
-    <div class="title">Bienvenue <?= htmlspecialchars($user['username'] ?? 'Utilisateur', ENT_QUOTES, 'UTF-8') ?></div>
-    <nav>
-      <a href="/home">Accueil</a>
-      <a href="/objects/mine">Mes Objets</a>
-      <a href="/exchanges">Échanges</a>
-      <?php if ((int) ($user['role_id'] ?? 0) === 1): ?>
-        <a href="/admin/categories">Admin</a>
-      <?php endif; ?>
-      <a href="/logout">Déconnexion</a>
-    </nav>
-  </header>
+  <?php $pageTitle = 'Bienvenue ' . htmlspecialchars($user['username'] ?? 'Utilisateur', ENT_QUOTES, 'UTF-8'); ?>
+  <?php include __DIR__ . '/partials/header.php'; ?>
 
   <div class="card">
     <h2>Bienvenue sur Takalo !</h2>

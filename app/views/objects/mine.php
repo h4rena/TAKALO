@@ -7,27 +7,9 @@
   <link rel="stylesheet" href="/assets/css/app.css">
 </head>
 <body>
-<?php
-$isAdmin = false;
-if (session_status() !== PHP_SESSION_ACTIVE) {
-  session_start();
-}
-$isAdmin = !empty($_SESSION['user']) && (int) ($_SESSION['user']['role_id'] ?? 0) === 1;
-?>
 <div class="container">
-  <header>
-    <div class="title">Mes Objets</div>
-    <nav>
-      <a href="/home">Accueil</a>
-      <a href="/objects/mine">Mes Objets</a>
-      <a href="/objects">Objets</a>
-      <a href="/exchanges">Échanges</a>
-      <?php if ($isAdmin): ?>
-        <a href="/admin/categories">Admin</a>
-      <?php endif; ?>
-      <a href="/logout">Déconnexion</a>
-    </nav>
-  </header>
+  <?php $pageTitle = 'Mes Objets'; ?>
+  <?php include __DIR__ . '/../partials/header.php'; ?>
 
   <?php if (!empty($error)): ?>
     <div class="flash error"><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?></div>

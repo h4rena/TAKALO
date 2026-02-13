@@ -8,12 +8,8 @@
 </head>
 <body>
 <div class="container">
-  <header>
-    <div class="title">Modifier Catégorie</div>
-    <nav>
-      <a href="/admin/categories">Retour</a>
-    </nav>
-  </header>
+  <?php $pageTitle = 'Modifier Catégorie'; ?>
+  <?php include __DIR__ . '/../partials/header_admin.php'; ?>
 
   <?php if (!empty($error)): ?>
     <div class="flash error"><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?></div>

@@ -8,12 +8,8 @@
 </head>
 <body>
 <div class="container">
-  <header>
-    <div class="title"><?= htmlspecialchars($mode === 'create' ? 'Nouvel Objet' : 'Modifier Objet', ENT_QUOTES, 'UTF-8') ?></div>
-    <nav>
-      <a href="/objects/mine">Retour</a>
-    </nav>
-  </header>
+  <?php $pageTitle = htmlspecialchars($mode === 'create' ? 'Nouvel Objet' : 'Modifier Objet', ENT_QUOTES, 'UTF-8'); ?>
+  <?php include __DIR__ . '/../partials/header.php'; ?>
 
   <?php if (!empty($error)): ?>
     <div class="flash error"><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?></div>
