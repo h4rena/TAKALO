@@ -71,6 +71,32 @@ $isAdmin = !empty($_SESSION['user']) && (int) ($_SESSION['user']['role_id'] ?? 0
   <br>
 
   <div class="card">
+    <h2>Historique d'appartenance</h2>
+    <?php if (empty($ownership_history)): ?>
+      <p>Aucun historique disponible.</p>
+    <?php else: ?>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Propriétaire</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php foreach ($ownership_history as $record): ?>
+            <tr>
+              <td><?= htmlspecialchars((string) $record->username, ENT_QUOTES, 'UTF-8') ?></td>
+              <td><?= htmlspecialchars(date('d/m/Y H:i', strtotime((string) $record->changed_at)), ENT_QUOTES, 'UTF-8') ?></td>
+            </tr>
+          <?php endforeach; ?>
+        </tbody>
+      </table>
+    <?php endif; ?>
+  </div>
+
+  <br>
+
+  <div class="card">
     <h2>Proposer un échange</h2>
     <?php if (empty($my_objects)): ?>
       <p>Tu dois avoir au moins un objet pour proposer un échange. <a href="/objects/create">Créer un objet</a></p>
@@ -90,5 +116,6 @@ $isAdmin = !empty($_SESSION['user']) && (int) ($_SESSION['user']['role_id'] ?? 0
     <?php endif; ?>
   </div>
 </div>
+<script src="/assets/js/script.js"></script>
 </body>
 </html>

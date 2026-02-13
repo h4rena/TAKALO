@@ -111,3 +111,19 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('Elements not found');
   }
 });
+
+// Object detail page: click on thumbnail to change hero image
+document.addEventListener('DOMContentLoaded', () => {
+  const heroImage = document.querySelector('.object-hero');
+  const thumbnails = document.querySelectorAll('.object-thumbs img');
+
+  if (heroImage && thumbnails.length > 0) {
+    thumbnails.forEach((thumb) => {
+      thumb.addEventListener('click', () => {
+        heroImage.src = thumb.src;
+      });
+
+      thumb.style.cursor = 'pointer';
+    });
+  }
+});

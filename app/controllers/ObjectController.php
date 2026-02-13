@@ -228,12 +228,14 @@ class ObjectController extends BaseController
 
 		$photos = ObjectModel::getPhotos($db, $id);
 		$myObjects = ObjectModel::getMine($db, (int) $user['id']);
+		$ownershipHistory = ObjectModel::getOwnershipHistory($db, $id);
 		$flash = $this->consumeFlash();
 
 		$this->app->render('objects/show', $flash + [
 			'object' => $object,
 			'photos' => $photos,
 			'my_objects' => $myObjects,
+			'ownership_history' => $ownershipHistory,
 		]);
 	}
 
