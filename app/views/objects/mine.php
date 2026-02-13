@@ -50,15 +50,20 @@ $isAdmin = !empty($_SESSION['user']) && (int) ($_SESSION['user']['role_id'] ?? 0
     <?php if (empty($objects)): ?>
       <p>Aucun objet pour le moment.</p>
     <?php else: ?>
-      <div class="list">
+      <div class="grid grid-3">
         <?php foreach ($objects as $obj): ?>
-          <div class="item">
-            <h3><?= htmlspecialchars((string) $obj->nom_objet, ENT_QUOTES, 'UTF-8') ?></h3>
-            <p><?= htmlspecialchars((string) ($obj->description ?? ''), ENT_QUOTES, 'UTF-8') ?></p>
-            <p><strong>Prix:</strong> <?= htmlspecialchars(number_format((float) $obj->price, 2), ENT_QUOTES, 'UTF-8') ?> €</p>
-            <?php if (!empty($obj->categorie_nom)): ?>
-              <span class="badge"><?= htmlspecialchars((string) $obj->categorie_nom, ENT_QUOTES, 'UTF-8') ?></span>
+          <div class="object-card">
+            <?php if (!empty($obj->image)): ?>
+              <img class="object-thumb" src="/assets/uploads/<?= htmlspecialchars((string) $obj->image, ENT_QUOTES, 'UTF-8') ?>" alt="Photo">
             <?php endif; ?>
+            <div class="meta">
+              <h3><?= htmlspecialchars((string) $obj->nom_objet, ENT_QUOTES, 'UTF-8') ?></h3>
+              <p><?= htmlspecialchars((string) ($obj->description ?? ''), ENT_QUOTES, 'UTF-8') ?></p>
+              <p><strong>Prix:</strong> <?= htmlspecialchars(number_format((float) $obj->price, 2), ENT_QUOTES, 'UTF-8') ?> €</p>
+              <?php if (!empty($obj->categorie_nom)): ?>
+                <span class="badge"><?= htmlspecialchars((string) $obj->categorie_nom, ENT_QUOTES, 'UTF-8') ?></span>
+              <?php endif; ?>
+            </div>
             <div class="actions">
               <form action="/objects/<?= (int) $obj->id ?>/edit" method="get" style="display:inline;">
                 <button type="submit" class="secondary">Modifier</button>

@@ -34,18 +34,22 @@ $isAdmin = !empty($_SESSION['user']) && (int) ($_SESSION['user']['role_id'] ?? 0
     <?php if (empty($objects)): ?>
       <p>Aucun objet disponible.</p>
     <?php else: ?>
-      <div class="grid grid-2">
+      <div class="grid grid-3">
         <?php foreach ($objects as $obj): ?>
-          <div class="item">
-            <h3><?= htmlspecialchars((string) $obj->nom_objet, ENT_QUOTES, 'UTF-8') ?></h3>
-            <p><strong>Par:</strong> <?= htmlspecialchars((string) $obj->username, ENT_QUOTES, 'UTF-8') ?></p>
-            <p><?= htmlspecialchars(mb_substr((string) ($obj->description ?? ''), 0, 100), ENT_QUOTES, 'UTF-8') ?></p>
-            <p><strong>Prix:</strong> <?= htmlspecialchars(number_format((float) $obj->price, 2), ENT_QUOTES, 'UTF-8') ?> €</p>
-            <?php if (!empty($obj->categorie_nom)): ?>
-              <span class="badge"><?= htmlspecialchars((string) $obj->categorie_nom, ENT_QUOTES, 'UTF-8') ?></span>
+          <div class="object-card">
+            <?php if (!empty($obj->image)): ?>
+              <img class="object-thumb" src="/assets/uploads/<?= htmlspecialchars((string) $obj->image, ENT_QUOTES, 'UTF-8') ?>" alt="Photo">
             <?php endif; ?>
-            <br><br>
-            <form action="/objects/<?= (int) $obj->id ?>" method="get">
+            <div class="meta">
+              <h3><?= htmlspecialchars((string) $obj->nom_objet, ENT_QUOTES, 'UTF-8') ?></h3>
+              <p><strong>Par:</strong> <?= htmlspecialchars((string) $obj->username, ENT_QUOTES, 'UTF-8') ?></p>
+              <p><?= htmlspecialchars(mb_substr((string) ($obj->description ?? ''), 0, 90), ENT_QUOTES, 'UTF-8') ?></p>
+              <p><strong>Prix:</strong> <?= htmlspecialchars(number_format((float) $obj->price, 2), ENT_QUOTES, 'UTF-8') ?> €</p>
+              <?php if (!empty($obj->categorie_nom)): ?>
+                <span class="badge"><?= htmlspecialchars((string) $obj->categorie_nom, ENT_QUOTES, 'UTF-8') ?></span>
+              <?php endif; ?>
+            </div>
+            <form action="/objects/<?= (int) $obj->id ?>" method="get" class="actions">
               <button type="submit" class="secondary">Voir Détails</button>
             </form>
           </div>

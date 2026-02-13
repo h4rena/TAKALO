@@ -21,6 +21,13 @@ class ObjectModel
 		);
 	}
 
+	public static function getAllWithOwner($db): array
+	{
+		return $db->fetchAll(
+			'SELECT o.*, u.username, c.nom AS categorie_nom FROM objet_takalo o JOIN user_takalo u ON u.id = o.id_owner LEFT JOIN categorie_takalo c ON c.id = o.id_categorie ORDER BY o.id DESC'
+		);
+	}
+
 	public static function find($db, int $id)
 	{
 		return $db->fetchRow('SELECT * FROM objet_takalo WHERE id = ?', [ $id ]);

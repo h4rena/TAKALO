@@ -67,6 +67,10 @@ nav a:hover {
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
 
+.grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
 .list {
   display: grid;
   gap: 12px;
@@ -77,6 +81,39 @@ nav a:hover {
   border-radius: 12px;
   padding: 12px;
   background: #fffdfb;
+}
+
+.item.compact {
+  padding: 10px;
+}
+
+.object-thumb {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  margin-bottom: 8px;
+}
+
+.object-card {
+  justify-content: center;
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: #fff;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+}
+
+.object-card .meta {
+  display: grid;
+  gap: 4px;
+}
+
+.object-card .actions {
+  margin-top: 6px;
 }
 
 .badge {
