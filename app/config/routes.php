@@ -1,5 +1,6 @@
 <?php
 
+use app\controllers\AdminController;
 use app\controllers\CategoryController;
 use app\controllers\ExchangeController;
 use app\controllers\HomeController;
@@ -57,6 +58,9 @@ $router->group('', function(Router $router) use ($app) {
     $router->post('/exchanges/@id/refuse', [ ExchangeController::class, 'refuse' ]);
 
     // Admin routes (login merge sur /login)
+    $router->get('/admin', function() use ($app) {
+        $app->redirect('/admin/stats');
+    });
     $router->get('/admin/login', function() use ($app) {
         $app->redirect('/login');
     });
@@ -67,6 +71,7 @@ $router->group('', function(Router $router) use ($app) {
         $app->redirect('/logout');
     });
 
+    $router->get('/admin/stats', [ AdminController::class, 'stats' ]);
     $router->get('/admin/categories', [ CategoryController::class, 'index' ]);
     $router->post('/admin/categories', [ CategoryController::class, 'store' ]);
     $router->get('/admin/categories/@id/edit', [ CategoryController::class, 'edit' ]);

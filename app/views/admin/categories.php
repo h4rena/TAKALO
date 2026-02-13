@@ -11,6 +11,7 @@
   <header>
     <div class="title">Gestion des Catégories</div>
     <nav>
+      <a href="/admin/stats">Statistiques</a>
       <a href="/admin/categories">Catégories</a>
       <a href="/admin/logout">Déconnexion</a>
     </nav>

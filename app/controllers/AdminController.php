@@ -14,7 +14,7 @@ class AdminController extends BaseController
 		}
 
 		if (!empty($_SESSION['user']) && (int) ($_SESSION['user']['role_id'] ?? 0) === 1) {
-			$this->app->redirect('/admin/categories');
+			$this->app->redirect('/admin/stats');
 			return;
 		}
 
@@ -75,7 +75,25 @@ class AdminController extends BaseController
 			'email' => (string) $user->email,
 		];
 
-		$this->app->redirect('/admin/categories');
+		$this->app->redirect('/admin/stats');
+	}
+
+	public function stats(): void
+	{
+		$this->requireAdmin();
+		$flash = $this->consumeFlash('admin_flash');
+
+		$totalUsers = 0;
+		try {
+			$db = $this->app->db();
+			$totalUsers = (int) $db->fetchField('SELECT COUNT(*) FROM user_takalo');
+		} catch (\Throwable $e) {
+			$flash = $flash + [ 'error' => 'Erreur lors du chargement des statistiques.' ];
+		}
+
+		$this->app->render('admin/stats', $flash + [
+			'totalUsers' => $totalUsers,
+		]);
 	}
 
 	public function logout(): void
