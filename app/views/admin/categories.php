@@ -8,8 +8,14 @@
 </head>
 <body>
 <div class="container">
-  <?php $pageTitle = 'Gestion des Catégories'; ?>
-  <?php include __DIR__ . '/../partials/header_admin.php'; ?>
+  <header>
+    <div class="title">Gestion des Catégories</div>
+    <nav>
+      <a href="/admin/stats">Statistiques</a>
+      <a href="/admin/categories">Catégories</a>
+      <a href="/admin/logout">Déconnexion</a>
+    </nav>
+  </header>
 
   <?php if (!empty($error)): ?>
     <div class="flash error"><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?></div>
